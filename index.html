@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Alumni Start-up Founders</title>
+
+    <meta charset="UTF-8">
+
+    <link href="css/bootstrapQ.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+</head>
+<style>
+
+    /* testing out d3 tooltip */
+    .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 8px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    body {
+        font-size: 16px;
+        line-height: 20px;
+        color: #525252;
+
+    }
+
+    h3 {
+        font-family: "Helvetica Neue";
+    }
+
+
+   #count-reset-row {
+    width: 100%;
+   }
+
+    #category-chart {
+        width: 300px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #vc-year-chart {
+        width: 520px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #exit-chart {
+        width: 300px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #undergrad-chart {
+        width: 240px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #grad-chart {
+        width: 240px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #discipline-chart {
+        width: 290px;
+        font-family: 'Lato', futura, georgia;
+        text-align: end;
+    }
+
+    #degree-year-chart {
+        width: 800px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #data-count-top {
+        width: 100%;
+    }
+
+    .navbar-text-q {
+        font: 400 24px "Helvetica Neue";
+        vertical-align: middle;
+    }
+
+
+    #founders-container {
+        margin-top: 46px;
+    }
+
+    span.filter {
+        font-size: 14px;
+        color: #cc4c02;
+        font-weight: 500;
+        } 
+
+    span.filter-count {
+        color: #428BCA;
+        font-weight: bold;
+        width: 20px;
+        font-size: 18px;
+    }
+
+    span.total-count {
+        color: #525252;
+        font-weight: bold;
+        width: 20px;
+    }
+
+    span.reset {
+        font-size: 12px;
+        color: #cc4c02;
+    }
+
+    span.company-desc {
+        color: #525252;
+        font-size: 16px;
+        font-weight: normal;
+    }
+
+    span.exit-desc {
+        background-color: yellow;
+    }
+
+    #reset-all {
+        color: #CC4C02;
+    }
+
+    tr.header {
+        font-family: 'Lato', futura, georgia;
+        color: #696969;
+    }
+</style>
+<body>
+   <!-- Fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+         <span class="navbar-text-q">UC Berkeley Alumni <span style="color:#969696"> who </span>Founded Start-Ups <span style="color:#969696">that were </span> Venture-backed <span style="color:#969696"> 2010 thru Q3 2013&nbsp;&nbsp;</span></span> 
+            <span class="btn-group"> 
+              <button type="button" class="btn btn-default" data-toggle="modal" href="#myModal">
+                About</span>
+              </button>
+            </span>   
+        </div>
+      </div>
+    </div>    
+
+        <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">About these graphs</h4>
+            </div>
+            <div class="modal-body">
+              <h4 class="modal-title">The data source</h4>
+              <p>These graphs represent data that was originally referenced in an October 2013 PitchBook blog post called <a target="_blank" href="http://blog.pitchbook.com/top-universities-producing-vc-backed-entrepreneurs/#%21">Top Universities Producing VC-backed Entrepreneurs</a>. 
+              <p>Start-up company description, founding date, and VC-exit details were primarily collected from self-reported data in <a target="_blank" href="http://www.crunchbase.com/">Crunchbase</a>.
+              <p>UC Berkeley alumni founder degree information was primarily collected from self-reported data on <a target="_blank" href="http://www.linkedin.com/">LinkedIn</a>.
+              <hr>
+              <h4 class="modal-title">The technology</h4>
+              <p>These interactive graphs were made using an excellent javascript charting library called <a target="_blank" href="http://nickqizhu.github.io/dc.js/">dc.js</a>, which was built to work natively with <a target="_blank" href="http://square.github.com/crossfilter/">crossfilter</a> and leverages the super awesome <a target="_blank" href="http://d3js.org">d3.js</a>.
+              <hr>
+              <p>Comments? Questions? Please contact saraquigley@berkeley.edu 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+<div class="container" id="founders-container">
+
+         <div id="data-count-top" class="row">
+                <span class="filter-count"></span> selected out of <span class="total-count"></span> records |&nbsp;
+                <span id="reset-all">
+                    <a href="javascript:dc.filterAll();dc.redrawAll();">Reset ALL Filters</a>
+                </span> 
+                 <p>
+            </div>   
+       
+       <div class="row">
+            <div id="category-chart">
+                <strong>Industry Sector</strong>
+                <a class="reset" href="javascript:categoryChart.filterAll();dc.redrawAll();" style="display: none;"> | reset</a><br>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="vc-year-chart">
+                <strong>Start-Up Founding Year</strong>
+                <a class="reset" href="javascript:vcYearChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                <span class="reset" style="display: none;"> | <span class="filter"></span></span>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="exit-chart">
+                <strong>Has there been a VC Exit?</strong>
+                <a class="reset" href="javascript:exitChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="discipline-chart">
+                <strong>Founder's Undergraduate&nbsp;</strong>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="undergrad-chart">
+                <strong>Major at UC Berkeley</strong>
+                <!-- <a class="reset" href="javascript:undergradChart.filterAll();dc.redrawAll();" style="display: none;">reset</a> -->
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="grad-chart">
+                <strong>Graduate Major</strong>
+                <a class="reset" href="javascript:gradChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="degree-year-chart">
+                <strong>Year that Founder Received a UC Berkeley Degree</strong>
+                <a class="reset" href="javascript:degreeYearChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                <span class="reset" style="display: none;"> | <span class="filter"></span></span>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div id="data-count-bottom" class="row">
+                <span class="filter-count"></span> selected out of <span class="total-count"></span> records |&nbsp;
+            
+            <span id="reset-all">
+            <a href="javascript:dc.filterAll();dc.redrawAll();">Reset ALL Filters</a>
+            </span>
+        </div>
+
+        <div id="data-table">
+            <br><br>
+            <table class="table table-hover dc-data-table">
+                <thead>
+                <tr class="header">
+                    <th>Start-Up Company Info</th>
+                    <th>Alumni Founders</th>
+                    <th>Degrees Received</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+</div>
+<script type="text/javascript" src="javascript/jquery.js"></script>
+<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/d3.min.js"></script>
+<script type="text/javascript" src="javascript/crossfilter.js"></script>
+<script type="text/javascript" src="javascript/dc.js"></script>
+<script type="text/javascript" src="javascript/d3.tip.min.js"></script>
+<script type="text/javascript" src="javascript/founders.js"></script>
+
+</body>
+</html>
