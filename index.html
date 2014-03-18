@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Alumni Start-up Founders</title>
+    <title>Alumni Startup Founders</title>
 
     <meta charset="UTF-8">
 
@@ -136,9 +136,20 @@
         font-weight: normal;
     }
 
+    span.chart-footnotes {
+        font: 200 14px "Helvetica Neue";
+        stroke: #969696;
+    }
+
     span.exit-desc {
         background-color: yellow;
     }
+
+    span.skydeck {
+        color: #4682B4;
+        font-weight: normal;
+    }
+
 
     #reset-all {
         color: #CC4C02;
@@ -154,7 +165,7 @@
       <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-         <span class="navbar-text-q">UC Berkeley Alumni <span style="color:#969696"> who </span>Founded Start-Ups <span style="color:#969696">that were </span> Venture-backed <span style="color:#969696"> 2010 thru Q3 2013&nbsp;&nbsp;</span></span> 
+         <span class="navbar-text-q">UC Berkeley Alumni <span style="color:#969696"> who </span>Founded Startups <span style="color:#969696">that were </span> Venture-backed <span style="color:#969696"> 2010 thru Q3 2013&nbsp;&nbsp;</span></span> 
             <span class="btn-group"> 
               <button type="button" class="btn btn-default" data-toggle="modal" href="#myModal">
                 About</span>
@@ -175,7 +186,7 @@
             <div class="modal-body">
               <h4 class="modal-title">The data source</h4>
               <p>These graphs represent data that was originally referenced in an October 2013 PitchBook blog post called <a target="_blank" href="http://blog.pitchbook.com/top-universities-producing-vc-backed-entrepreneurs/#%21">Top Universities Producing VC-backed Entrepreneurs</a>. 
-              <p>Start-up company description, founding date, and VC-exit details were primarily collected from self-reported data in <a target="_blank" href="http://www.crunchbase.com/">Crunchbase</a>.
+              <p>Startup company description, founding date, and VC-exit details were primarily collected from self-reported data in <a target="_blank" href="http://www.crunchbase.com/">Crunchbase</a>.
               <p>UC Berkeley alumni founder degree information was primarily collected from self-reported data on <a target="_blank" href="http://www.linkedin.com/">LinkedIn</a>.
               <p>The csv file behind these graphs is <a target="_blank" href="https://docs.google.com/a/berkeley.edu/spreadsheet/ccc?key=0AuHt2HFisLhZdHQ0a0gxRTZPaVNhcklvYUxyTEVwQXc#gid=0">here</a></p>
               <hr>
@@ -241,7 +252,7 @@
             </div>
 
             <div id="degree-year-chart">
-                <strong>Year that Founder Received a UC Berkeley Degree</strong>
+                <strong>Year that Founder Received a UC Berkeley Degree</strong><span class="chart-footnotes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For multiple degrees, the most recent year)</span>
                 <a class="reset" href="javascript:degreeYearChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
                 <span class="reset" style="display: none;"> | <span class="filter"></span></span>
 
@@ -261,7 +272,7 @@
             <table class="table table-hover dc-data-table">
                 <thead>
                 <tr class="header">
-                    <th>Start-Up Company Info</th>
+                    <th>Startup Company Info</th>
                     <th>Alumni Founders</th>
                     <th>Degrees Received</th>
                 </tr>
