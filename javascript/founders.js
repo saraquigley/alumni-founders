@@ -189,7 +189,7 @@
                                 .dimension(founders)
                                 .group(function (d) {
                                     return d.company + " <span class='company-desc'> " + d.description +
-                                    "<br><strong>Founded: </strong>" + d.dateFounded +
+                                    "<br>" + (d.skyDeck ? "<a target='_blank' href='http://skydeck.berkeley.edu/'><img src='skyDeck.png' height='30px'/><span class='skydeck'>A SkyDeck Startup&nbsp;&nbsp;</span></a>" : "") + "<strong>Founded: </strong>" + d.dateFounded +
                                     "&nbsp;&nbsp;<strong>Sector:</strong> " + d.category  +
                                     "&nbsp;&nbsp;<span class='exit-desc'>" + (d.exitDetails ? "<strong>Exit: </strong>" + d.exitDetails : "") + "</span></span>";
                                 })
